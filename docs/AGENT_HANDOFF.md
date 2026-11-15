@@ -7,7 +7,7 @@
 
 Build **走起啦 · Zokila**, a consumer travel and mobility assistant on Pi. The name and direction are user-confirmed; the first workflow hypothesis is an editable, source-aware short-trip itinerary driven by dates, budget, interests and practical constraints. The first user segment and trip type are not validated. Decision 0004 supersedes the earlier market-research product direction; decision 0005 records the name.
 
-The private GitHub repository `Eason2277/zokila` has been created. Local `origin` points to it, and `upstream` points to the official Pi repository. No source commit or push had been completed at this handoff update. This is an early prototype publication, not a claim of end-user readiness. See `docs/ARCHITECTURE.md` and `docs/UPSTREAM_SYNC.md`.
+The private GitHub repository `Eason2277/zokila` has been created. Local `origin` points to it, and `upstream` points to the official Pi repository. Local prototype commit `4ed3cba83` is prepared; the push is pending a repository Actions decision and has not been verified. This is an early prototype snapshot, not a claim of end-user readiness. See `docs/ARCHITECTURE.md` and `docs/UPSTREAM_SYNC.md`.
 
 ## Current Architecture
 
@@ -55,7 +55,7 @@ The working tree contains staged and unstaged changes from prior sessions in the
 
 ## Next Steps
 
-1. Review the staged file list, commit the Zokila prototype, and push to the verified private `origin` when the repository workflow setting and root-check failure have been handled. Git push dry-run succeeded through the existing Git credential; GitHub CLI still reports an invalid login token. Verify the remote branch after push.
+1. Once the user answers the pending GitHub Actions setting request, apply that setting or keep it enabled as requested, then push local `main` to the verified private `origin`. Git push dry-run succeeded through the existing Git credential; GitHub CLI still reports an invalid login token. Verify the remote branch after push. Local commit `4ed3cba83` contains the prototype; this handoff update needs its own commit before push.
 2. Inspect the current React workbench and Git diff before changing it. Its market-research content is legacy demo UI.
 3. Validate a narrow travel-planning scenario and usable data sources; assess whether desktop remains the right first product form factor.
 4. Adapt one end-to-end UI slice to a travel itinerary, keeping demo labels until real behavior exists.
