@@ -1,7 +1,7 @@
 # Agent Handoff — Zokila and Legacy Workbench
 
 - Updated: 2026-11-15 (architecture and repository publication review)
-- Project root: this Pi monorepo directory (`/Users/zhengxin/code/Do agent/pi`)
+- Project root: this repository's root directory
 
 ## Objective
 
