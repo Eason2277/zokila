@@ -7,7 +7,7 @@
 
 Build **走起啦 · Zokila**, a consumer travel and mobility assistant on Pi. The name and direction are user-confirmed; the first workflow hypothesis is an editable, source-aware short-trip itinerary driven by dates, budget, interests and practical constraints. The first user segment and trip type are not validated. Decision 0004 supersedes the earlier market-research product direction; decision 0005 records the name.
 
-The private GitHub repository `Eason2277/zokila` has been created. Local `origin` points to it, and `upstream` points to the official Pi repository. Local prototype commit `4ed3cba83` is prepared; the push is pending a repository Actions decision and has not been verified. This is an early prototype snapshot, not a claim of end-user readiness. See `docs/ARCHITECTURE.md` and `docs/UPSTREAM_SYNC.md`.
+The public GitHub repository `Eason2277/zokila` has been created. Local `origin` points to it, and `upstream` points to the official Pi repository. The ChatGPT GitHub connector is installed and scoped to this repository. Local commits are prepared but have not yet been pushed. The user confirmed future CLI and graphical client modes; shared runtime/deployment remains open. This is an early prototype, not an end-user-ready product. See `docs/ARCHITECTURE.md` and `docs/UPSTREAM_SYNC.md`.
 
 ## Current Architecture
 
@@ -20,7 +20,7 @@ The private GitHub repository `Eason2277/zokila` has been created. Local `origin
 
 ## Product and UI Decisions
 
-- The name 走起啦 · Zokila and consumer travel direction are confirmed by the user. The first traveler segment and short-trip workflow are hypotheses. See `docs/product/PRODUCT_BRIEF.md`, `docs/product/MVP_PRD.md`, and decisions 0004–0005.
+- The name 走起啦 · Zokila, consumer travel direction, and future CLI plus graphical client modes are confirmed by the user. The first traveler segment, short-trip workflow, and runtime deployment are hypotheses. See `docs/product/PRODUCT_BRIEF.md`, `docs/product/MVP_PRD.md`, and decisions 0004–0006.
 - Keep the Apple Music-inspired desktop layout, original artwork, and Manchester City sky-blue accent. Use `#6CABDD` as the current digital reference; preserve OS semantic colors for macOS traffic lights and evidence states.
 - Button icons use fixed-size, centered SVGs. Buttons must never translate, scale, or bounce on hover; this standing preference is also recorded in `PRODUCT_CONTEXT.md`.
 - macOS traffic lights and Windows window controls have platform-specific placement and behavior. Keep the Windows controls' translucent glass treatment.

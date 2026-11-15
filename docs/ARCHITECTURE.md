@@ -4,7 +4,20 @@
 
 ## 目标与当前结论
 
-Zokila 是面向普通旅行者的个人旅行与出行助手，使用 Pi 作为 Agent 底座。当前仓库保留完整 Pi monorepo，并在 `apps/market-research-workbench/` 放有 Electron + React/TypeScript 原型。**现有权限边界可以作为桌面原型的起点；现有产品流程尚未实现，不能供真实旅行用户使用。**
+Zokila 是面向普通旅行者的个人旅行与出行助手，使用 Pi 作为 Agent 底座。用户已确定未来同时提供 **CLI 模式和图形客户端模式**。当前仓库保留完整 Pi monorepo，并在 `apps/market-research-workbench/` 放有 Electron + React/TypeScript 原型。**现有权限边界可以作为桌面原型的起点；CLI、旅行产品流程和两端共享能力都尚未实现，不能供真实旅行用户使用。**
+
+## 双端目标架构（目标，部署方式待验证）
+
+```text
+Zokila CLI ─────┐
+                ├── Zokila application services ── Pi Agent runtime ── travel data/tools
+Zokila Client ──┘                 │
+                                  └── trip state, preferences, permissions, provenance
+```
+
+CLI 与图形客户端是同一产品的两种交互入口，应复用旅行领域能力、行程状态、来源信息和操作确认规则，不各自实现一套 Agent 逻辑。Pi 提供 Agent 运行与工具调用能力；Zokila 应用层定义旅行领域操作和用户数据边界。
+
+本地优先有利于本地运行，但跨设备同步和模型凭证管理更复杂；服务端优先便于多端共享，但增加账号、留存和运维责任；混合方式需要解决本地与云端同步。先验证用户是否需要两种入口及跨设备连续性，再确定部署方式。无论采用哪种方式，CLI 也必须遵守相同的敏感数据处理和外部操作确认规则。
 
 ## 已实现的边界
 
@@ -15,6 +28,7 @@ Zokila 是面向普通旅行者的个人旅行与出行助手，使用 Pi 作为
 | preload | 只向 React 暴露窗口控制；没有暴露原始 IPC、文件系统或 Shell。 |
 | React 渲染进程 | 展示旧市场研究演示数据；表单和提示消息只更新本地 UI 状态。 |
 | 旅行数据与服务 | 未实现行程模型、地点与交通数据接入、保存、用户账号、Pi 会话、结果评测和发布包。 |
+| CLI / 客户端 | 只有旧 Electron 客户端原型；Zokila CLI 和两端共用的旅行服务都未实现。 |
 
 旧静态页面 `workbench.html`、`app.js` 是历史原型；当前入口是 `index.html` → `src/main.tsx` → `src/App.tsx`。不要把表单提交成功或浏览器预览当作 Agent 已完成任务。
 

@@ -8,7 +8,7 @@ The user-confirmed product name is **走起啦 · Zokila** (Chinese: 走起啦; 
 
 The product direction is a **consumer travel and mobility assistant**: help an individual plan and adjust trips around their dates, budget, interests, pace, companions, and practical constraints. The product serves ordinary travelers while aiming for enterprise-quality engineering: reliable state, clear data boundaries, traceable time-sensitive information, and safe tool permissions.
 
-The first product slice is a **personal travel planning workbench**. The provisional first user is an individual planning a short trip. The initial workflow is to capture trip constraints, build an editable itinerary from sourced information, identify conflicts and unknowns, and let the user confirm consequential choices.
+The product is intended to provide both a **CLI mode** and a **graphical client mode** over the same travel capabilities. The first product slice is a personal travel-planning workflow. The provisional first user is an individual planning a short trip. Capture trip constraints, build an editable itinerary from sourced information, identify conflicts and unknowns, and let the user confirm consequential choices.
 
 This direction is newly selected but its target segment, highest-value trip type, and willingness to reuse remain hypotheses. Avoid expanding into food delivery, fashion, beauty, and general lifestyle features until the travel workflow is validated.
 
@@ -51,7 +51,7 @@ Do not describe the prototype as a working travel Agent. Keep demo labels visibl
 
 Pi is the Agent foundation, not the complete product. The product UI and workflow belong in `apps/market-research-workbench/`; modify Pi core only when the required capability cannot be implemented through the supported SDK or app boundary.
 
-For the current desktop prototype, the intended integration is to host Pi in the Electron main process through the Pi TypeScript SDK. This does not decide the final consumer deployment: if Zokila becomes a Web or mobile app, Pi sessions and model credentials need a controlled backend. See `docs/ARCHITECTURE.md`. Before implementing the desktop connection, read:
+For the current desktop prototype, the intended integration is to host Pi in the Electron main process through the Pi TypeScript SDK. The future CLI and graphical client should share Zokila travel operations and policy rules; whether they share a local runtime, backend, or hybrid deployment remains open. See `docs/ARCHITECTURE.md`. Before implementing the desktop connection, read:
 
 - `packages/coding-agent/docs/sdk.md`
 - `packages/coding-agent/examples/sdk/README.md`
