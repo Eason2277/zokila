@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			http-equiv="Content-Security-Policy"
+			content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'"
+		/>
+		<title>Market Desk · 德国市场进入研究</title>
+		<link rel="stylesheet" href="./apple-music.css" />
+	</head>
+	<body>
+		<div class="app-shell">
+			<aside class="sidebar">
+				<div class="window-controls mac-window-controls" aria-label="macOS 窗口控制">
+					<button class="window-dot close" type="button" data-window-action="close" aria-label="关闭窗口"></button>
+					<button class="window-dot minimize" type="button" data-window-action="minimize" aria-label="最小化窗口"></button>
+					<button class="window-dot maximize" type="button" data-window-action="toggle-fullscreen" aria-label="进入或退出全屏"></button>
+				</div>
+				<div class="brand-lockup">
+					<div class="brand-mark" aria-hidden="true"><span>M</span></div>
+					<div><div class="brand-name">Market Desk</div><div class="brand-caption">市场研究工作台</div></div>
+				</div>
+
+				<button class="sidebar-search" type="button" id="sidebarSearch"><span>⌕</span> 搜索 <kbd>⌘ K</kbd></button>
+				<nav class="main-nav" aria-label="主导航">
+					<button class="nav-item" data-view="home" type="button"><span class="nav-icon">⌂</span><span>首页</span></button>
+					<button class="nav-item active" data-view="workspace" type="button"><span class="nav-icon">▤</span><span>研究工作台</span><span class="nav-count">3</span></button>
+					<button class="nav-item" id="newResearchButton" data-view="new" type="button"><span class="nav-icon plus">＋</span><span>新建研究</span></button>
+					<button class="nav-item" data-view="sources" type="button"><span class="nav-icon">◉</span><span>资料来源</span></button>
+				</nav>
+
+				<div class="sidebar-section">
+					<div class="sidebar-heading">客户项目 <button class="sidebar-more" type="button" aria-label="更多项目">···</button></div>
+					<div class="recent-list">
+						<button class="recent-item selected" data-title="德国市场进入研究" type="button"><span class="mini-cover cover-germany">DE</span><span class="recent-copy"><strong>德国市场进入研究</strong><small>远帆精密 · 伺服电机</small></span></button>
+						<button class="recent-item" data-title="东南亚工厂数字化需求" type="button"><span class="mini-cover cover-asia">SEA</span><span class="recent-copy"><strong>东南亚工厂数字化需求</strong><small>亚洲市场 · 数字化</small></span></button>
+						<button class="recent-item" data-title="北美渠道初步扫描" type="button"><span class="mini-cover cover-america">US</span><span class="recent-copy"><strong>北美渠道初步扫描</strong><small>北美市场 · 渠道</small></span></button>
+					</div>
+				</div>
+
+				<div class="sidebar-section library-section">
+					<div class="sidebar-heading">资料库</div>
+					<button class="library-item" type="button"><span>◷</span> 最近添加 <small>12</small></button>
+					<button class="library-item" type="button"><span>▱</span> 行业资料 <small>8</small></button>
+					<button class="library-item" type="button"><span>▤</span> 客户文件 <small>4</small></button>
+				</div>
+
+				<div class="sidebar-bottom">
+					<div class="workspace-switcher"><div class="workspace-avatar">远</div><div class="workspace-copy"><strong>远帆咨询</strong><span>团队工作空间</span></div><span class="switch-chevron">⌄</span></div>
+					<button class="settings-link" type="button"><span>⚙</span> 设置与偏好</button>
+				</div>
+			</aside>
+
+			<main class="main-area">
+				<header class="topbar">
+					<div class="window-navigation"><button class="round-control" type="button" aria-label="后退">‹</button><button class="round-control" type="button" aria-label="前进">›</button></div>
+					<div class="topbar-actions">
+						<button class="round-control invite-button" type="button" id="shareButton" aria-label="分享项目">♙<span>＋</span></button>
+						<button class="round-control" type="button" id="editBriefButton" aria-label="编辑简报">⌁</button>
+						<button class="toolbar-pill" type="button" id="reviewButton"><span class="check-mark">✓</span><span>···</span></button>
+						<button class="round-control" type="button" aria-label="列表视图">☷</button>
+						<label class="top-search"><span>⌕</span><input id="researchSearch" type="search" placeholder="搜索这份研究" /><kbd>⌘ F</kbd></label>
+						<div class="window-controls windows-window-controls" aria-label="Windows 窗口控制">
+							<button class="window-action" type="button" data-window-action="minimize" aria-label="最小化窗口"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 6h8" /></svg></button>
+							<button class="window-action" type="button" data-window-action="toggle-maximize" aria-label="最大化或还原窗口"><svg class="maximize-glyph" viewBox="0 0 12 12" aria-hidden="true"><rect x="2.25" y="2.25" width="7.5" height="7.5" rx=".6" /></svg><svg class="restore-glyph" viewBox="0 0 12 12" aria-hidden="true"><path d="M4 2.5h5.5v5.5M8 4H2.5v5.5H8z" /></svg></button>
+							<button class="window-action close-action" type="button" data-window-action="close" aria-label="关闭窗口"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m3 3 6 6M9 3 3 9" /></svg></button>
+						</div>
+					</div>
+				</header>
+
+				<div class="page-scroll">
+					<div class="breadcrumb-line"><span>研究工作台</span><span class="crumb-slash">/</span><strong id="breadcrumbTitle">德国市场进入研究</strong><span class="demo-status"><i></i>演示草稿</span></div>
+
+					<section class="hero-section" aria-labelledby="pageTitle">
+						<div class="hero-art" aria-label="德国工业市场研究主题封面">
+							<div class="art-grid"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-core"></div>
+							<div class="art-index">FIELD NOTES <span>·</span> 001</div><div class="art-country">DE</div><div class="art-bottom"><span>GERMANY</span><span>INDUSTRY / MARKET</span></div>
+						</div>
+						<div class="hero-copy">
+							<div class="hero-kicker"><span class="kicker-line"></span> MARKET INTELLIGENCE <span class="kicker-dot">•</span> 研究简报</div>
+							<h1 id="pageTitle">德国市场进入研究</h1>
+							<div class="hero-project"><strong>远帆精密</strong><span></span><span id="marketLabel">德国 · 工业伺服电机</span></div>
+							<p class="page-subtitle">梳理目标市场机会、潜在客户与进入条件，为团队下一步判断提供依据。</p>
+							<div class="hero-actions"><button class="button button-primary" id="continueResearchButton" type="button"><span>▶</span> 继续研究</button><button class="button button-soft" id="exportButton" type="button"><span>↓</span> 导出简报</button><button class="button-icon" id="editTaskButton" type="button" aria-label="调整研究范围">···</button></div>
+							<div class="hero-meta"><span><i class="meta-dot"></i> 研究草稿</span><span>·</span><span>3 个研究章节</span><span>·</span><span>最近更新 10月25日</span></div>
+						</div>
+					</section>
+
+					<div class="demo-notice"><span class="notice-icon">i</span><span><strong>演示内容</strong>　市场描述与来源均为占位示例，不代表真实研究结论。</span><button type="button" id="dismissNotice" aria-label="关闭提示">×</button></div>
+
+					<section class="research-progress" aria-label="研究进度">
+						<div class="progress-title"><span>研究进度</span><strong>初步扫描 <em>2 / 4</em></strong></div>
+						<div class="progress-track"><span></span></div>
+						<div class="progress-steps"><span class="step-done"><i>✓</i>任务背景</span><span class="step-done"><i>✓</i>研究提纲</span><span class="step-active"><i>3</i>证据整理</span><span><i>4</i>人工审核</span></div>
+					</section>
+
+					<section class="findings-section" aria-labelledby="findingsTitle">
+						<div class="section-heading"><div><div class="section-eyebrow">RESEARCH NOTES</div><h2 id="findingsTitle">研究发现</h2><p>每条发现都应能追溯来源，或明确标注为推断与待核查。</p></div><div class="list-actions"><button class="filter-button" type="button" id="allSourcesButton">全部来源⌄</button><button class="filter-button" type="button" id="addSourceButton">＋ 添加资料</button></div></div>
+						<div class="finding-table">
+							<div class="table-head"><span>发现</span><span>类型</span><span>来源</span><span>状态</span><span></span></div>
+							<article class="finding-row" data-search="德国市场概览 工业自动化 伺服电机 市场规模">
+								<span class="finding-index">01</span><div class="finding-main"><div class="finding-icon icon-market">↗</div><div><h3>市场概览</h3><p>德国工业自动化需求与汽车、机械设备和工厂自动化场景相关；当前资料不足以判断细分市场规模与增速。</p></div></div><span class="finding-kind">市场线索</span><button class="source-chip" type="button"><span class="source-symbol">↗</span>来源 A <small>占位</small></button><span class="finding-status status-check"><i></i>待核查</span><button class="row-more" type="button" aria-label="市场概览更多操作">···</button>
+							</article>
+							<article class="finding-row" data-search="潜在客户 渠道 设备制造商 系统集成商 工业分销">
+								<span class="finding-index">02</span><div class="finding-main"><div class="finding-icon icon-buyer">⌖</div><div><h3>潜在客户与渠道</h3><p>可优先研究设备制造商、系统集成商及工业自动化分销渠道，并核实其本地服务要求。</p></div></div><span class="finding-kind">渠道线索</span><button class="source-chip" type="button"><span class="source-symbol">▤</span>客户材料 <small>未添加</small></button><span class="finding-status status-inference"><i></i>分析推断</span><button class="row-more" type="button" aria-label="潜在客户与渠道更多操作">···</button>
+							</article>
+							<article class="finding-row" data-search="本地化 认证 售后 服务 交付周期">
+								<span class="finding-index">03</span><div class="finding-main"><div class="finding-icon icon-entry">⌘</div><div><h3>进入条件与本地化</h3><p>产品认证、售后响应、调试支持和交付周期需要结合目标行业逐项确认。</p></div></div><span class="finding-kind">进入条件</span><button class="source-chip" type="button"><span class="source-symbol">＋</span>添加来源</button><span class="finding-status status-open"><i></i>待补资料</span><button class="row-more" type="button" aria-label="进入条件更多操作">···</button>
+							</article>
+							<article class="finding-row" data-search="下一步 问题 目标行业 竞品 样本">
+								<span class="finding-index">04</span><div class="finding-main"><div class="finding-icon icon-question">?</div><div><h3>建议下一步核查</h3><p>明确首批目标行业，并补充可验证的竞品、渠道与采购周期样本。</p></div></div><span class="finding-kind">待回答问题</span><button class="source-chip" type="button"><span class="source-symbol">✳</span>研究助手 <small>草稿</small></button><span class="finding-status status-open"><i></i>需确认</span><button class="row-more" type="button" aria-label="下一步核查更多操作">···</button>
+							</article>
+						</div>
+						<div class="table-foot"><span>4 条研究记录</span><span>内容由 Agent 整理，交付前请人工核验</span></div>
+					</section>
+					<div class="source-note"><span>⌕</span><div><strong>来源与证据</strong><span>查看这份研究引用的公开资料、客户文件和日期信息。</span></div><button type="button" id="viewSourcesButton">查看来源清单 <span>→</span></button></div>
+				</div>
+
+				<div class="assistant-dock">
+					<div class="dock-agent"><span class="agent-mark">✳</span><div><strong>研究助手</strong><small><i></i> 演示模式</small></div></div>
+					<form class="chat-composer" id="chatForm"><textarea id="chatInput" rows="1" placeholder="追问、补充背景，或告诉研究助手下一步做什么…"></textarea><div class="composer-actions"><button type="button" class="dock-suggestion suggestion" data-prompt="列出这份简报最需要补充的证据">待补证据</button><button type="button" class="dock-suggestion suggestion" data-prompt="帮我细化德国市场的目标客户类型">细化客户</button><span class="composer-hint">演示模式 · 不会调用模型</span><button class="send-button" type="submit" aria-label="发送消息">↑</button></div></form>
+				</div>
+			</main>
+		</div>
+
+		<div class="toast" id="toast" role="status" aria-live="polite"></div>
+		<div class="modal-backdrop" id="modalBackdrop" hidden>
+			<section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+				<div class="modal-heading"><div><span class="section-eyebrow">NEW RESEARCH</span><h2 id="modalTitle">创建市场研究任务</h2><p>先确定研究对象和目标市场，后续可以继续补充。</p></div><button class="modal-close" id="closeModal" type="button" aria-label="关闭">×</button></div>
+				<form id="researchForm" class="research-form">
+					<label>客户或项目名称<input name="client" placeholder="例如：远帆精密" required /></label>
+					<div class="form-grid"><label>产品 / 业务<input name="product" placeholder="例如：工业伺服电机" required /></label><label>目标国家或地区<input name="market" placeholder="例如：德国" required /></label></div>
+					<label>本次想回答的问题<textarea name="question" rows="3" placeholder="例如：优先进入哪些行业？需要核查哪些本地要求？" required></textarea></label>
+					<div class="form-note"><span>i</span> 创建后会先生成研究提纲。演示版本不会调用 Pi 或外部服务。</div>
+					<div class="modal-actions"><button class="button button-soft" id="cancelModal" type="button">取消</button><button class="button button-primary" type="submit">创建研究任务 <span>→</span></button></div>
+				</form>
+			</section>
+		</div>
+		<script src="./app.js"></script>
+	</body>
+</html>

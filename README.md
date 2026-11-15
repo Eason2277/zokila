@@ -1,3 +1,16 @@
+# 走起啦 · Zokila
+
+Zokila is a consumer travel assistant in development, built on the [Pi agent foundation](https://github.com/earendil-works/pi). The intended product helps travelers plan and revise itineraries with clear constraints, sources, and uncertainty. **The current Electron interface is an older market-research demo; it is not yet a working travel agent.**
+
+- [Product direction and current limits](PRODUCT_CONTEXT.md)
+- [MVP scope](docs/product/MVP_PRD.md)
+- [Architecture review and path to a usable app](docs/ARCHITECTURE.md)
+- [Keeping this repository in sync with Pi](docs/UPSTREAM_SYNC.md)
+
+The Pi source and its original documentation are retained below. Pi's MIT license and copyright notice are preserved in [LICENSE](LICENSE).
+
+---
+
 <p align="center">
   <a href="https://pi.dev">
     <img alt="pi logo" src="https://pi.dev/logo-auto.svg" width="128">

@@ -1,5 +1,43 @@
 # Development Rules
 
+## Project and Product Context
+
+This repository is the sole project root for the user's product and the Pi Agent base. Preserve Pi upstream behavior; keep product features under `apps/market-research-workbench/` until an app-directory rename is explicitly planned. The directory name and current UI still reflect the previous market-research prototype.
+
+For product work, start with [`PRODUCT_CONTEXT.md`](PRODUCT_CONTEXT.md). Read the relevant product brief, MVP PRD, decisions, or handoff only as needed; [`docs/README.md`](docs/README.md) maps their roles. Do not load the whole document set for every task.
+
+Confirmed direction and name: build **走起啦 · Zokila**, a consumer travel and mobility assistant on Pi. The first user segment and trip-planning workflow remain hypotheses, not validated requirements. Update the product docs when user requirements change.
+
+The existing desktop prototype uses Electron plus a React/TypeScript renderer. Keep Pi SDK access in the Electron main process behind a narrow preload API. Do not expose raw IPC, filesystem access, or general shell access to the renderer. Treat travel dates, location and preferences as personal data; show sources and freshness for time-sensitive travel information, and require explicit confirmation before bookings or purchases.
+
+Visual preference: Apple Music-inspired dark desktop layout, Manchester City sky-blue accent, centered button icons, and **no button movement, scaling, or bounce on hover**. Keep artwork original and macOS/Windows window controls platform-appropriate.
+
+For substantial changes, state goal/scope/acceptance criteria and separate confirmed facts from assumptions. Prefer a small end-to-end slice; preserve unrelated staged and unstaged changes. Never perform bulk or recursive deletion. Ask before deleting any file; if cleanup would delete multiple files, ask the user to handle it manually. Record product or architecture decisions in `docs/decisions/` with rationale, risks, and reevaluation conditions.
+
+## Product and Systems Judgment
+
+- Start from the actor, their task, workflow, constraints, expected outcome, and failure cost. Do not add architecture just because the product may grow.
+- The user has limited time for broad discovery. Make useful, reversible progress with explicit assumptions; ask a focused question only when an unknown could change product boundaries, expose personal data, create external commitments, or cause substantial rework.
+- Travel outputs must separate source-supported facts, recommendations, assumptions, and unresolved questions. Never invent prices, schedules, opening hours, availability, or citations.
+- Minimize personal data. Before sending location, dates, or preferences to model/search services, make the data path, permissions, and retention explicit.
+
+## AI Task Workflow and Handoff
+
+- Before a substantial task, identify its goal, scope, acceptance criteria, evidence, assumptions, and unknowns. Load only relevant files and focused sections.
+- For substantial or multi-step work, follow the `context-engineering` skill to keep the working context focused and maintain a usable handoff.
+- Keep small, self-contained changes lightweight and prefer repository-defined commands and portable paths.
+- When diagnosing timeouts or failures, measure request size, latency, retries, and the failing layer before attributing the problem to context length.
+- At meaningful boundaries, record decisions and verification results. If a task becomes long or context is at risk, create or update `docs/AGENT_HANDOFF.md` with the exact next steps and tell the user.
+- A handoff should include the objective, acceptance criteria, completed work, changed files, key decisions, verification, unresolved issues, risks, and exact next steps. Never claim an exact remaining token count.
+- Preserve unrelated staged and unstaged changes. Do not claim that an unrun build, check, launch, or test succeeded.
+- Assume macOS for local computer, terminal, and IDE instructions unless the user specifies another platform. Treat `~/.codex/USER_PROFILE.md` as optional context; read only relevant sections when they materially help the task.
+- The user is an experienced front-end engineer expanding into back-end and AI engineering. Explain system boundaries and why choices work without re-teaching familiar UI basics.
+- For English-only user messages, use natural American English and give concise language feedback when relevant.
+
+## Rule Maintenance
+
+Add project rules only when they prevent a concrete, repeatable mistake that cannot be automated elsewhere. Record a brief reason with the rule, and remove it when it becomes redundant, obsolete, or unenforceable.
+
 ## Conversational Style
 
 - Keep answers short and concise
@@ -11,10 +49,12 @@
 - Prefer concrete behavior and small illustrations over abstract summaries, dense terminology, or unexplained lists of changes.
 - When the user asks a question, answer it first before making edits or running implementation commands.
 - When responding to user feedback or an analysis, explicitly say whether you agree or disagree before saying what you changed.
+- By default, teach implementation work step by step while keeping the overall roadmap visible: state how the current step fits, give the user one concrete change to make, then review it before moving on. Let the user implement; generate the complete result only when explicitly requested. Reason: the user wants to learn Agent and back-end development by doing the work, not only receive finished code.
 
 ## Code Quality
 
 - Read files in full before wide-ranging changes, before editing files you have not fully inspected, and when asked to investigate or audit. Do not rely on search snippets for broad changes.
+- Add plain-language comments at useful points so a learner can follow a component or function: its purpose, where its input comes from, what it changes or returns, and what happens next across layers. Include enough detail for unfamiliar Agent, Electron, and business flows; do not comment every line or merely restate syntax. Reason: this project is also a learning project, and the user asked for comments detailed enough to follow the implementation independently.
 - No `any` unless absolutely necessary.
 - Inline single-line helpers that have only one call site.
 - Check node_modules for external API types; don't guess.
@@ -122,4 +162,4 @@ For release preparation, publishing, verification, or recovery, load and follow 
 
 ## User Override
 
-If the user's instructions conflict with any rule in this document, ask for explicit confirmation before overriding. Only then execute their instructions.
+Follow the user's current explicit instructions over project-level defaults when intent is clear and no higher-priority safety or destructive-operation rule prevents it. Ask only when a material ambiguity remains; do not request confirmation again for actions already authorized.
