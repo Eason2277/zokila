@@ -1,13 +1,18 @@
 # 走起啦 · Zokila
 
-Zokila is a consumer travel assistant in development, built on the [Pi agent foundation](https://github.com/earendil-works/pi). The intended product helps travelers plan and revise itineraries with clear constraints, sources, and uncertainty. **The current Electron interface is an older market-research demo; it is not yet a working travel agent.**
+走起啦是一个正在开发的个人旅行与出行 Agent，基于 [Pi](https://github.com/earendil-works/pi) 构建。目标是让用户按日期、预算、兴趣和现实约束规划、核查并调整行程。
 
-- [Product direction and current limits](PRODUCT_CONTEXT.md)
-- [MVP scope](docs/product/MVP_PRD.md)
-- [Architecture review and path to a usable app](docs/ARCHITECTURE.md)
-- [Keeping this repository in sync with Pi](docs/UPSTREAM_SYNC.md)
+**当前状态：早期原型。** 仓库中的 Electron + React 界面仍展示旧的市场研究演示内容；旅行功能、Pi SDK 接入、真实数据源和行程保存均未实现。它还不能供旅行者实际使用。
 
-The Pi source and its original documentation are retained below. Pi's MIT license and copyright notice are preserved in [LICENSE](LICENSE).
+Zokila is a consumer travel assistant in development on the Pi agent foundation. Its planned workflow is an editable itinerary with explicit constraints, sources, and uncertainty. The current UI is a legacy demo, not a working travel agent.
+
+- [产品方向与边界 / Product context](PRODUCT_CONTEXT.md)
+- [首版范围 / MVP scope](docs/product/MVP_PRD.md)
+- [架构现状与可用产品路径 / Architecture](docs/ARCHITECTURE.md)
+- [当前原型运行说明 / Prototype setup](apps/market-research-workbench/README.md)
+- [从 Pi 同步更新 / Upstream sync](docs/UPSTREAM_SYNC.md)
+
+本仓库保留了 Pi 源码与下方的原始项目说明，以便持续获取上游更新。Pi 的 MIT 许可及原作者版权声明保留在 [LICENSE](LICENSE)。
 
 ---
 
