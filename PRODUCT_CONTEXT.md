@@ -8,7 +8,7 @@ The user-confirmed product name is **走起啦 · Zokila** (Chinese: 走起啦; 
 
 The product direction is a **consumer travel and mobility assistant**: help an individual plan and adjust trips around their dates, budget, interests, pace, companions, and practical constraints. The product serves ordinary travelers while aiming for enterprise-quality engineering: reliable state, clear data boundaries, traceable time-sensitive information, and safe tool permissions.
 
-The product is intended to provide both a **CLI mode** and a **graphical client mode** over the same travel capabilities. The first product slice is a personal travel-planning workflow. The provisional first user is an individual planning a short trip. Capture trip constraints, build an editable itinerary from sourced information, identify conflicts and unknowns, and let the user confirm consequential choices.
+The product is intended to provide both a **Zokila travel CLI** and a **graphical client** over the same travel capabilities. Pi already provides its own general-purpose CLI; that is the Agent foundation/tooling, not Zokila's user-facing travel interface. Zokila's CLI should expose travel-specific commands while reusing Pi Agent capabilities. The first product slice is a personal travel-planning workflow. The provisional first user is an individual planning a short trip. Capture trip constraints, build an editable itinerary from sourced information, identify conflicts and unknowns, and let the user confirm consequential choices.
 
 This direction is newly selected but its target segment, highest-value trip type, and willingness to reuse remain hypotheses. Avoid expanding into food delivery, fashion, beauty, and general lifestyle features until the travel workflow is validated.
 
