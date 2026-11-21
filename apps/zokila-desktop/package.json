@@ -1,9 +1,9 @@
 {
-  "name": "@pi/market-research-workbench",
+  "name": "@zokila/desktop",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Desktop workbench prototype for manufacturing market research",
+  "description": "Desktop prototype for the Zokila travel assistant",
   "main": "main.cjs",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5173 --strictPort",

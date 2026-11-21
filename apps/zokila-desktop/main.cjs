@@ -14,12 +14,12 @@ const contentTypes = new Map([
 ]);
 
 protocol.registerSchemesAsPrivileged([
-	{ scheme: "marketdesk", privileges: { standard: true, secure: true } },
+	{ scheme: "zokila", privileges: { standard: true, secure: true } },
 ]);
 
 function registerLocalProtocol() {
 	// 正式运行时从 dist 目录提供页面文件，不让页面随意读取电脑上的文件。
-	protocol.handle("marketdesk", (request) => {
+		protocol.handle("zokila", (request) => {
 		const decodedPath = decodeURIComponent(new URL(request.url).pathname);
 		const relativePath = decodedPath.replace(/^\/+/, "") || "index.html";
 		const assetPath = path.resolve(distPath, relativePath);
@@ -43,40 +43,40 @@ function assertMainWindow(event) {
 	// 只处理本应用窗口发来的请求，避免其他页面控制桌面窗口。
 	const senderWindow = BrowserWindow.fromWebContents(event.sender);
 	if (!senderWindow || senderWindow !== mainWindow) {
-		throw new Error("Window controls are only available to the Market Desk window.");
+		throw new Error("Window controls are only available to the Zokila window.");
 	}
 	return senderWindow;
 }
 
 function sendWindowSizeState() {
 	if (!mainWindow || mainWindow.isDestroyed()) return;
-	mainWindow.webContents.send("marketdesk:window:large-state", mainWindow.isMaximized() || mainWindow.isFullScreen());
+	mainWindow.webContents.send("zokila:window:large-state", mainWindow.isMaximized() || mainWindow.isFullScreen());
 }
 
 // 接收 preload 转来的请求，并在主进程里实际控制窗口。
-ipcMain.handle("marketdesk:window:minimize", (event) => {
+ipcMain.handle("zokila:window:minimize", (event) => {
 	assertMainWindow(event).minimize();
 });
 
-ipcMain.handle("marketdesk:window:toggle-maximize", (event) => {
+ipcMain.handle("zokila:window:toggle-maximize", (event) => {
 	const window = assertMainWindow(event);
 	if (window.isMaximized()) window.unmaximize();
 	else window.maximize();
 	return window.isMaximized() || window.isFullScreen();
 });
 
-ipcMain.handle("marketdesk:window:toggle-fullscreen", (event) => {
+ipcMain.handle("zokila:window:toggle-fullscreen", (event) => {
 	const window = assertMainWindow(event);
 	window.setFullScreen(!window.isFullScreen());
 	return window.isMaximized() || window.isFullScreen();
 });
 
-ipcMain.handle("marketdesk:window:is-maximized", (event) => {
+ipcMain.handle("zokila:window:is-maximized", (event) => {
 	const window = assertMainWindow(event);
 	return window.isMaximized() || window.isFullScreen();
 });
 
-ipcMain.handle("marketdesk:window:close", (event) => {
+ipcMain.handle("zokila:window:close", (event) => {
 	assertMainWindow(event).close();
 });
 
@@ -87,7 +87,7 @@ function createWindow() {
 		minWidth: 1100,
 		minHeight: 720,
 		backgroundColor: "#211f1d",
-		title: "Market Desk",
+		title: "Zokila · 走起啦",
 		frame: false,
 		autoHideMenuBar: true,
 		roundedCorners: true,
@@ -106,12 +106,12 @@ function createWindow() {
 
 	mainWindow.webContents.setWindowOpenHandler(() => ({ action: "deny" }));
 	mainWindow.webContents.on("will-navigate", (event, url) => {
-		const isAppUrl = url.startsWith("marketdesk://workbench/");
-		const devOrigin = process.env.MARKETDESK_DEV_URL ? new URL(process.env.MARKETDESK_DEV_URL).origin : undefined;
+		const isAppUrl = url.startsWith("zokila://app/");
+		const devOrigin = process.env.ZOKILA_DEV_URL ? new URL(process.env.ZOKILA_DEV_URL).origin : undefined;
 		const isDevelopmentUrl = devOrigin && new URL(url).origin === devOrigin;
 		if (!isAppUrl && !isDevelopmentUrl) event.preventDefault();
 	});
-	mainWindow.loadURL(process.env.MARKETDESK_DEV_URL ?? "marketdesk://workbench/");
+	mainWindow.loadURL(process.env.ZOKILA_DEV_URL ?? "zokila://app/");
 }
 
 app.whenReady().then(() => {

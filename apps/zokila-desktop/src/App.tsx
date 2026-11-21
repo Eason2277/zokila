@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { FormEvent, ReactNode } from "react";
 
+import { demoDraft } from "./demo-trip"
+import { ItineraryView } from "./ItineraryView";
+
 type Platform = "darwin" | "win32" | "linux" | "web";
 type WindowAction = "close" | "minimize" | "toggle-fullscreen" | "toggle-maximize";
 type IconName =
@@ -272,7 +275,7 @@ const findings: Finding[] = [
 
 function getPlatform(): Platform {
 	// Electron 模式优先读取主进程提供的平台；浏览器预览时再看地址参数或系统信息。
-	const appPlatform = window.marketDeskWindow?.platform;
+	const appPlatform = window.zokilaWindow?.platform;
 	if (appPlatform === "darwin" || appPlatform === "win32" || appPlatform === "linux") return appPlatform;
 
 	const previewPlatform = new URLSearchParams(window.location.search).get("platform");
@@ -382,11 +385,11 @@ function Sidebar({
 			<WindowControls platform={getPlatform()} onAction={onWindowAction} location="sidebar" />
 			<div className="brand-lockup">
 				<div className="brand-mark" aria-hidden="true">
-					<span>M</span>
+					<span>Z</span>
 				</div>
 				<div>
-					<div className="brand-name">Market Desk</div>
-					<div className="brand-caption">市场研究工作台</div>
+					<div className="brand-name">Zokila</div>
+					<div className="brand-caption">走起啦 · 旅行助手原型</div>
 				</div>
 			</div>
 
@@ -898,7 +901,7 @@ export function App() {
 
 	useEffect(() => {
 		// Electron 页面启动后先读取窗口大小状态，再订阅后续变化。
-		const api = window.marketDeskWindow;
+		const api = window.zokilaWindow;
 		if (!api) return;
 		void api
 			.isMaximized()
@@ -933,7 +936,7 @@ export function App() {
 
 	// 窗口操作先交给 preload，再由 Electron 主进程执行。
 	async function handleWindowAction(action: WindowAction) {
-		const api = window.marketDeskWindow;
+		const api = window.zokilaWindow;
 		if (!api) {
 			showToast("窗口按钮会在 Electron 桌面应用中控制窗口。");
 			return;
@@ -1052,12 +1055,8 @@ export function App() {
 							</span>
 						</div>
 					</section>
-					<Findings
-						items={filteredFindings}
-						onSourceClick={() => handleAction("查看来源")}
-						onSources={() => handleAction("来源筛选")}
-						onAddSource={() => handleAction("添加资料")}
-					/>
+					<ItineraryView draft={demoDraft} />
+
 					<div className="source-note">
 						<span>
 							<Icon name="search" size={17} />

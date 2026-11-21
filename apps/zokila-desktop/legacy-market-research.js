@@ -1,6 +1,6 @@
 const toast = document.querySelector("#toast");
 const modalBackdrop = document.querySelector("#modalBackdrop");
-const windowApi = window.marketDeskWindow;
+const windowApi = window.zokilaWindow;
 let toastTimer;
 
 const browserPlatform = navigator.platform.toLowerCase();
