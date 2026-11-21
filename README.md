@@ -9,7 +9,7 @@ Zokila is a consumer travel assistant in development on the Pi agent foundation.
 - [产品方向与边界 / Product context](PRODUCT_CONTEXT.md)
 - [首版范围 / MVP scope](docs/product/MVP_PRD.md)
 - [架构现状与可用产品路径 / Architecture](docs/ARCHITECTURE.md)
-- [当前原型运行说明 / Prototype setup](apps/market-research-workbench/README.md)
+- [当前原型运行说明 / Prototype setup](apps/zokila-desktop/README.md)
 - [从 Pi 同步更新 / Upstream sync](docs/UPSTREAM_SYNC.md)
 
 本仓库保留了 Pi 源码与下方的原始项目说明，以便持续获取上游更新。Pi 的 MIT 许可及原作者版权声明保留在 [LICENSE](LICENSE)。

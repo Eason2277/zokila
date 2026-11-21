@@ -1,6 +1,6 @@
 # 从 Pi 上游同步更新
 
-Zokila 保留 Pi 上游源码及提交历史。个人仓库 `https://github.com/Eason2277/zokila.git` 使用 `origin`，Pi 官方仓库 `https://github.com/earendil-works/pi.git` 使用 `upstream`。当前个人仓库为私有，后续公开发布应在产品内容和仓库自动化流程审查后决定。
+Zokila 保留 Pi 上游源码及提交历史。公开的个人仓库 `https://github.com/Eason2277/zokila.git` 使用 `origin`，Pi 官方仓库 `https://github.com/earendil-works/pi.git` 使用 `upstream`。仓库保留 Pi 的上游 GitHub Actions；启用 Zokila 自己的发布流程前，应逐项审查这些工作流。
 
 ## 常规更新
 

@@ -1,74 +1,86 @@
-# Agent Handoff — Zokila and Legacy Workbench
+# Agent Handoff — Zokila Travel UI Slice
 
-- Updated: 2026-11-15 (architecture and repository publication review)
+- Updated: 2026-11-21
 - Project root: this repository's root directory
+- Branch: `main`
+- Current phase: hand-written travel UI slice, in progress (kind, status, sources, confirmation, and assumptions shown)
 
 ## Objective
 
-Build **走起啦 · Zokila**, a consumer travel and mobility assistant on Pi. The name and direction are user-confirmed; the first workflow hypothesis is an editable, source-aware short-trip itinerary driven by dates, budget, interests and practical constraints. The first user segment and trip type are not validated. Decision 0004 supersedes the earlier market-research product direction; decision 0005 records the name.
+Build **走起啦 · Zokila**, a consumer travel and mobility assistant on Pi. The first product slice is an editable, source-aware short-trip itinerary driven by dates, budget, interests and practical constraints. Name and direction are user-confirmed; the first user segment and trip type are still hypotheses. See `docs/product/PRODUCT_BRIEF.md`, `docs/product/MVP_PRD.md`, and decisions 0004–0006.
 
-The public GitHub repository `Eason2277/zokila` has been created. Local `origin` points to it, and `upstream` points to the official Pi repository. The ChatGPT GitHub connector is installed and scoped to this repository. Local commits are prepared but have not yet been pushed. The user confirmed future CLI and graphical client modes; shared runtime/deployment remains open. This is an early prototype, not an end-user-ready product. See `docs/ARCHITECTURE.md` and `docs/UPSTREAM_SYNC.md`.
+This session started the first travel UI slice: define the data shapes, create one fixture, and render a read-only itinerary before Pi integration. It deliberately does **not** connect Pi, persistence, or real data sources yet.
 
-## Current Architecture
+## Working Agreement (important for the next agent)
 
-- Pi upstream monorepo is the Agent foundation.
-- Desktop shell: Electron 45, `apps/market-research-workbench/main.cjs`.
-- Renderer: React 19.3 + TypeScript, bootstrapped by Vite 8.3.4 from `apps/market-research-workbench/index.html` → `src/main.tsx` → `src/App.tsx`.
-- Electron main process serves the production `dist/` bundle through the `marketdesk://` protocol. The Vite preview runs at `http://127.0.0.1:5173/`.
-- Renderer receives only a narrow window-control API through `preload.cjs`. It has no direct Node, filesystem, shell, or Pi SDK access.
-- Pi SDK, real search, trip persistence, source storage, and export are not integrated. All current market-research content is obsolete demo data; the UI has not been adapted to travel.
+The user asked to be taught step by step and is hand-writing the code. Follow the rule added to `AGENTS.md` under `## Conversational Style`:
 
-## Product and UI Decisions
+- Give one small change per turn; wait for the user to type it and run `npm run typecheck --workspace=apps/zokila-desktop`.
+- Do not write whole files or multi-step solutions unless the user explicitly says to write it completely in that turn. An earlier request to generate one file does not carry over.
+- Explain the syntax the user is typing (JSX tags, props, `map`/`key`, `??`, `Record`, type imports). They are an experienced front-end engineer learning Agent/back-end work, but asked for syntax-level teaching here.
+- Review their file after each step; point out what is missing or semantically wrong before moving on.
 
-- The name 走起啦 · Zokila, consumer travel direction, and future CLI plus graphical client modes are confirmed by the user. The first traveler segment, short-trip workflow, and runtime deployment are hypotheses. See `docs/product/PRODUCT_BRIEF.md`, `docs/product/MVP_PRD.md`, and decisions 0004–0006.
-- Keep the Apple Music-inspired desktop layout, original artwork, and Manchester City sky-blue accent. Use `#6CABDD` as the current digital reference; preserve OS semantic colors for macOS traffic lights and evidence states.
-- Button icons use fixed-size, centered SVGs. Buttons must never translate, scale, or bounce on hover; this standing preference is also recorded in `PRODUCT_CONTEXT.md`.
-- macOS traffic lights and Windows window controls have platform-specific placement and behavior. Keep the Windows controls' translucent glass treatment.
-- Apple UI assets are not embedded. The active interface is authored in project HTML/CSS/React.
-- Travel facts need traceable sources and freshness; distinguish sourced facts, recommendations, assumptions and unknowns. Do not send personal travel details to external services before the data path and retention rules are explicit. Bookings and purchases require explicit user confirmation.
-- Decision `0003-react-renderer-on-electron.md` supersedes decision `0002-desktop-workbench-electron.md` for renderer technology. Both are historical technical rationale. The desktop form factor should be reassessed for a personal travel product before major UI expansion.
+## Completed This Session
 
-## Work Completed
+Data shapes and fixture:
 
-- Reviewed the repository for publication: the active app is still a market-research demo, with no Pi SDK or travel workflow. Added a Zokila introduction above the preserved Pi README, an architecture/status document, and an upstream sync guide; extended `.gitignore` for local environment variants.
-- Consolidated product documents under `docs/`, added `docs/README.md`, and merged product rules with upstream development rules in `AGENTS.md`.
-- Added the React/Vite renderer while preserving Electron and the existing narrow preload/window API.
-- Kept the earlier static files `workbench.html`, `app.js`, and `styles.css` as an unreferenced rollback prototype; the current Electron/Vite entry is `index.html` and `src/main.tsx`.
-- Added exact-version React/Vite dependencies and updated `package-lock.json`.
-- Local browser preview is available at `http://127.0.0.1:5173/`. The in-app browser tab was open on this preview at handoff time.
-- The outer workspace `AGENTS.md` was deleted at the user's request after its rules were merged into this repository's `AGENTS.md`. Copies of the earlier outer `docs/` files remain outside the repository; canonical copies are under `pi/docs/`.
+- `apps/zokila-desktop/src/trip-request.ts` — `TravelPace`, `Budget`, `TripRequest`.
+- `apps/zokila-desktop/src/itinerary.ts` — `SourceRef`, `EvidenceStatus`, `StopKind`, `ItineraryStop`, `ItineraryDay`, `ItineraryDraft`.
+- `apps/zokila-desktop/src/demo-trip.ts` — `demoRequest` and `demoDraft`; explicitly labeled demo data; source links use `example.com` on purpose. Covers `sourced`, `unverified`, `inferred`, and `userConfirmed: true`.
+
+UI wiring:
+
+- `apps/zokila-desktop/src/App.tsx` — added `import { demoDraft } from "./demo-trip"` and `import { ItineraryView } from "./ItineraryView"`; replaced the `<Findings ... />` JSX with `<ItineraryView draft={demoDraft} />` (around line 1058). The old market-research components and data remain unused in the file.
+- `apps/zokila-desktop/src/ItineraryView.tsx` — hand-written by the user through the assumptions list:
+  - header: destination, day count, date range, party size;
+  - outer `draft.days.map` with `key={day.date}`;
+  - inner `day.stops.map` with `key={stop.id}`;
+  - each stop renders time, title, Chinese kind label, evidence status, source names and retrieval dates, and an `已确认` marker when `userConfirmed` is true;
+  - `draft.assumptions` renders below the daily stops. The other three draft note lists are still missing.
+
+Docs and rules:
+
+- `AGENTS.md` — added a rule about one-small-change teaching, with the 2026-11-21 incident as reason (a complete component was generated after the user asked to learn step by step).
+
+## Key Decisions
+
+- Split user input (`TripRequest`) from agent output (`ItineraryDraft`). They are separate modules and will be separate sides of the future IPC boundary.
+- All shapes are plain serializable data: no `Date` objects, no `enum`, no classes. Dates are `YYYY-MM-DD` strings; timestamps are ISO 8601 strings. `erasableSyntaxOnly` and `verbatimModuleSyntax` apply.
+- `ItineraryStop.userConfirmed` exists to satisfy MVP PRD item 4: confirmed choices must survive re-planning and must not be silently replaced.
+- `EvidenceStatus` semantics: `sourced` = has source and retrieval time; `unverified` = missing source, stale, or conflicting; `inferred` = agent suggestion, not fact. `status` is authoritative; do not infer it from `sources.length` alone.
+- `demoDraft` is a stand-in for the future Pi response. The shape should not change when Pi is connected; only the data source changes.
+- `TripRequest.budgets?: Budget[]` is the user's current choice. It has two representations of "unknown" (omitted vs empty array). The earlier recommendation was a single `budget?: Budget`; this is still open. Do not change it silently.
+- No styling work yet. The component renders semantic HTML; the existing `.finding-*`, `.source-chip`, `.finding-status` styles in `desktop.css` are available if the next agent chooses to reuse them. Button hover must never move, scale, or bounce.
 
 ## Verification
 
-- Current review: source inspection confirmed the Electron main/preload boundary and the lack of real Agent and travel behavior. No new app runtime or packaged launch was verified in this review.
-- Current review: `npm run typecheck --workspace=apps/market-research-workbench` passed; `git diff --check` and staged diff whitespace checks passed. `npm run check` reached root TypeScript checking and failed with many Pi model-catalog type errors because the gitignored `packages/ai/src/providers/data/` directory is absent. Earlier formatting and dependency/entry checks passed; no fixes were applied. The full root check is not green, and the later browser smoke stage did not run.
-- Passed: `npm run typecheck --workspace=apps/market-research-workbench`.
-- Passed: React renderer loaded in the Vite preview; new-research form submission and research-list filtering worked.
-- Passed: `node --check` for the Electron main and preload scripts during the prior window-control change, plus Git diff whitespace checks.
-- Not verified: Electron desktop startup. The Electron 45 runtime is absent; attempts to download it failed or stalled, so `npm start` cannot yet open a native window.
-- Pi root `npm run check` reaches TypeScript checking but fails with numerous model-related errors under `packages/ai`, `packages/agent`, and `packages/coding-agent` (including `unknown` model manifests and model IDs inferred as `never`). Do not attribute these failures to the workbench without fresh evidence.
-- No production Vite build or test suite was run.
+- `npm run typecheck --workspace=apps/zokila-desktop` → exit 0 (run 2026-11-21, current working tree).
+- The user confirmed the Vite preview at `http://127.0.0.1:5173/` shows the itinerary component and stop list. No screenshot or automated check was recorded.
+- Root `npm run check` ran and passed Biome, pinned-dependency, runtime-dependency, import, entry-graph, and install-lock checks. Its TypeScript phase failed with cascading model-catalog errors because the gitignored `packages/ai/src/providers/data/` directory is absent; the browser smoke phase did not run.
+- Electron native launch was not attempted in this session; the Electron 45 runtime is still a known blocker from the previous handoff.
 
 ## Working Tree Notes
 
-The working tree contains staged and unstaged changes from prior sessions in the workbench and docs, plus a changed lockfile. Recheck `git status --short` before any work and preserve unrelated changes. This handoff is a dated snapshot, not proof of current Git or runtime state.
+- The `apps/market-research-workbench/` → `apps/zokila-desktop/` rename and related docs are still staged and uncommitted from the previous session. Preserve them.
+- `apps/zokila-desktop/src/Itinerary.tsx` is an **empty untracked** stray file. Exclude it from commits; do not delete it without asking the user.
+- `apps/zokila-desktop/src/trip-request.ts`, `itinerary.ts`, and `ItineraryView.tsx` contain mixed staged/working-tree changes. Read the working tree before editing.
+- `App.tsx` still contains obsolete market-research components and demo data (`initialProject`, `projects`, `findings`, `Hero`, `Findings`, `ResearchDialog`, research progress, source note). They are unreferenced or partially unreferenced after the `<Findings>` replacement. Do not remove them until the user approves the cleanup.
+- Multiple sessions may edit this repo. Stage explicit paths only; never `git add -A`; do not commit unless the user asks.
 
-## Next Steps
+## Exact Next Steps
 
-1. Once the user answers the pending GitHub Actions setting request, apply that setting or keep it enabled as requested, then push local `main` to the verified private `origin`. Git push dry-run succeeded through the existing Git credential; GitHub CLI still reports an invalid login token. Verify the remote branch after push. Local commit `4ed3cba83` contains the prototype; this handoff update needs its own commit before push.
-2. Inspect the current React workbench and Git diff before changing it. Its market-research content is legacy demo UI.
-3. Validate a narrow travel-planning scenario and usable data sources; assess whether desktop remains the right first product form factor.
-4. Adapt one end-to-end UI slice to a travel itinerary, keeping demo labels until real behavior exists.
-5. Before Pi integration, read `packages/coding-agent/docs/sdk.md` and `packages/coding-agent/examples/sdk/README.md`. Define narrow travel-information tools and explicit action confirmation; never expose Pi sessions or privileged APIs directly to React.
-6. Resolve Electron runtime download/installation if the desktop path is retained. Do not weaken Electron security settings to make startup easier.
+1. Render `draft.openQuestions`, `warnings`, and `budgetNotes` as distinct lists, one small user-authored step at a time.
+2. Add evidence-state styling and source freshness cues; keep the demo warning prominent because all current URLs are placeholders.
+3. With the user's approval, replace the remaining market-research page contents in `App.tsx` with the travel slice; keep the demo notice visible.
+4. Turn `ResearchDialog` into a travel request form producing `TripRequest` (MVP PRD item 1). Keep optional fields optional.
+5. Later, integrate Pi SDK in the Electron main process behind a narrow preload API (`generateItinerary(request) → ItineraryDraft`). Read `packages/coding-agent/docs/sdk.md` and `packages/coding-agent/examples/sdk/README.md` first. Never expose Pi sessions or raw IPC to the renderer. Resolve the Electron runtime blocker separately.
+6. After that, add local persistence and evaluate real data sources (MVP PRD §9 open questions).
 
-## Resume Commands
-
-From the Pi repository root:
+## Useful Commands
 
 ```sh
-npm run typecheck --workspace=apps/market-research-workbench
-npm run dev --workspace=apps/market-research-workbench
+npm run typecheck --workspace=apps/zokila-desktop
+npm run dev --workspace=apps/zokila-desktop   # http://127.0.0.1:5173/
 ```
 
-For a desktop release path, first install the Electron runtime using the documented install process, then build and launch the Electron app. The native runtime download is the current blocker.
+Root checks and the full test suite are not required for this UI slice; see `AGENTS.md` for the repository's check and test boundaries.

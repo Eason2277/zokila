@@ -2,7 +2,7 @@
 
 ## Project and Product Context
 
-This repository is the sole project root for the user's product and the Pi Agent base. Preserve Pi upstream behavior; keep product features under `apps/market-research-workbench/` until an app-directory rename is explicitly planned. The directory name and current UI still reflect the previous market-research prototype.
+This repository is the sole project root for the user's product and the Pi Agent base. Preserve Pi upstream behavior; keep the desktop product under `apps/zokila-desktop/` and future Zokila CLI code in a separate product entry point. The current UI still contains market-research demonstration content.
 
 For product work, start with [`PRODUCT_CONTEXT.md`](PRODUCT_CONTEXT.md). Read the relevant product brief, MVP PRD, decisions, or handoff only as needed; [`docs/README.md`](docs/README.md) maps their roles. Do not load the whole document set for every task.
 
@@ -50,6 +50,7 @@ Add project rules only when they prevent a concrete, repeatable mistake that can
 - When the user asks a question, answer it first before making edits or running implementation commands.
 - When responding to user feedback or an analysis, explicitly say whether you agree or disagree before saying what you changed.
 - By default, teach implementation work step by step while keeping the overall roadmap visible: state how the current step fits, give the user one concrete change to make, then review it before moving on. Let the user implement; generate the complete result only when explicitly requested. Reason: the user wants to learn Agent and back-end development by doing the work, not only receive finished code.
+- When the user asks to learn, give one small change to type or run, then wait for their result before the next step. Do not write whole files or multi-step solutions unless the user explicitly says to write it completely in that turn; an earlier request to generate one file does not carry over to later files. Reason: on 2026-11-21, after the user asked to be taught step by step, a complete React component was generated anyway, which skipped the learning step.
 
 ## Code Quality
 

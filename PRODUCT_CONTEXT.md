@@ -31,7 +31,7 @@ This direction is newly selected but its target segment, highest-value trip type
 
 ## Current Implementation
 
-The existing Electron + React/TypeScript prototype lives at `apps/market-research-workbench/`. Its name, UI and demo data still represent the previous market-research direction. No travel workflow or Pi SDK integration is implemented. For entry points, verification history and blockers, read the dated `docs/AGENT_HANDOFF.md` and check the current code.
+The Electron + React/TypeScript prototype lives at `apps/zokila-desktop/`. It now renders a read-only travel itinerary from local demo data, while the surrounding page still contains market-research content. Trip input, editing, real travel sources, and Pi SDK integration are not implemented. For entry points, verification history and blockers, read the dated `docs/AGENT_HANDOFF.md` and check the current code.
 
 ## Visual Direction
 
@@ -49,13 +49,13 @@ Do not describe the prototype as a working travel Agent. Keep demo labels visibl
 
 ## Pi Integration Direction
 
-Pi is the Agent foundation, not the complete product. The product UI and workflow belong in `apps/market-research-workbench/`; modify Pi core only when the required capability cannot be implemented through the supported SDK or app boundary.
+Pi is the Agent foundation, not the complete product. The current desktop UI belongs in `apps/zokila-desktop/`; modify Pi core only when the required capability cannot be implemented through the supported SDK or app boundary.
 
 For the current desktop prototype, the intended integration is to host Pi in the Electron main process through the Pi TypeScript SDK. The future CLI and graphical client should share Zokila travel operations and policy rules; whether they share a local runtime, backend, or hybrid deployment remains open. See `docs/ARCHITECTURE.md`. Before implementing the desktop connection, read:
 
 - `packages/coding-agent/docs/sdk.md`
 - `packages/coding-agent/examples/sdk/README.md`
-- `apps/market-research-workbench/AGENTS.md` if one is added later
+- `apps/zokila-desktop/AGENTS.md` if one is added later
 
 Keep privileged Node.js and Pi session access out of the renderer. If renderer-to-main communication is added, expose only narrow, validated operations through a preload bridge; never expose raw `ipcRenderer` or general filesystem/shell access. Keep context isolation, renderer sandboxing, the restrictive Content Security Policy, and navigation restrictions enabled. Booking and purchase tools must require an explicit confirmation step.
 

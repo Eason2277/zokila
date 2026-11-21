@@ -4,7 +4,7 @@
 
 ## 目标与当前结论
 
-Zokila 是面向普通旅行者的个人旅行与出行助手，使用 Pi 作为 Agent 底座。用户已确定未来同时提供 **CLI 模式和图形客户端模式**。当前仓库保留完整 Pi monorepo，并在 `apps/market-research-workbench/` 放有 Electron + React/TypeScript 原型。**现有权限边界可以作为桌面原型的起点；CLI、旅行产品流程和两端共享能力都尚未实现，不能供真实旅行用户使用。**
+Zokila 是面向普通旅行者的个人旅行与出行助手，使用 Pi 作为 Agent 底座。用户已确定未来同时提供 **CLI 模式和图形客户端模式**。当前仓库保留完整 Pi monorepo，并在 `apps/zokila-desktop/` 放有 Electron + React/TypeScript 原型。原型已用本地演示数据渲染只读旅行行程；**现有权限边界可以作为桌面原型的起点，但 CLI、可编辑旅行流程和两端共享能力尚未实现，不能供真实旅行用户使用。**
 
 ## 双端目标架构（目标，部署方式待验证）
 
@@ -26,11 +26,11 @@ Pi 上游已有通用 Pi CLI；它是 Agent 开发/运行工具，不等于 Zoki
 | Pi 源码 | 保留上游 monorepo，可继续读取 SDK 并获取上游更新；Zokila 尚未调用 SDK。 |
 | Electron 主进程 | 创建桌面窗口、加载受限的本地页面、处理有限的窗口控制 IPC。 |
 | preload | 只向 React 暴露窗口控制；没有暴露原始 IPC、文件系统或 Shell。 |
-| React 渲染进程 | 展示旧市场研究演示数据；表单和提示消息只更新本地 UI 状态。 |
-| 旅行数据与服务 | 未实现行程模型、地点与交通数据接入、保存、用户账号、Pi 会话、结果评测和发布包。 |
+| React 渲染进程 | 在旧市场研究演示页面内展示只读旅行行程；表单和提示消息只更新本地 UI 状态。 |
+| 旅行数据与服务 | 已有旅行输入和行程草稿的 TypeScript 类型及本地演示数据；地点与交通数据接入、保存、用户账号、Pi 会话、结果评测和发布包均未实现。 |
 | CLI / 客户端 | 只有旧 Electron 客户端原型；Zokila CLI 和两端共用的旅行服务都未实现。 |
 
-旧静态页面 `workbench.html`、`app.js` 是历史原型；当前入口是 `index.html` → `src/main.tsx` → `src/App.tsx`。不要把表单提交成功或浏览器预览当作 Agent 已完成任务。
+旧静态页面 `legacy-market-research.html`、`legacy-market-research.js` 是历史原型；当前入口是 `index.html` → `src/main.tsx` → `src/App.tsx`。不要把表单提交成功或浏览器预览当作 Agent 已完成任务。
 
 ## 最小可用闭环（目标，尚未实现）
 
